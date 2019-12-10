@@ -1,14 +1,22 @@
 ﻿<Window x:Class="WizardsWitchesAndWombats.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WizardsWitchesAndWombats"
         Title="Wizards, Witches, and Wombats" Height="1080" Width="1920" WindowStyle="None" WindowState="Maximized" PreviewKeyDown="Window_PreviewKeyDown">
     <Grid>
         <Image Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_Empty.png" />
-        <Image Name="Idle" Visibility="Collapsed" Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_Plain.png" />
-        <Image Name="BadLeft" Visibility="Collapsed" Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_BadLeft.png" />
-        <Image Name="BadRight" Visibility="Collapsed" Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_BadRight.png" />
-        <Image Name="DoubleGood" Visibility="Collapsed" Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_DoubleGood.png" />
-        <Image Name="DoubleBad" Visibility="Collapsed" Height="1080" Width="1920" Source="/WizardsWitchesAndWombats;component/Images/Wizards_DoubleBad.png" />
+
+        <local:CharacterAvatar x:Name="LeftCharacter" CharacterType="Wizard" Margin="378,452,1074,5" />
+        <local:CharacterAvatar x:Name="RightCharacter" CharacterType="Wizard" Margin="1533,454,-81,3">
+            <local:CharacterAvatar.RenderTransform>
+                <ScaleTransform ScaleX="-1"  />
+            </local:CharacterAvatar.RenderTransform>
+        </local:CharacterAvatar>
+
+        <Image Name="BadLeft" Visibility="Collapsed" Height="455" Width="728" Source="/WizardsWitchesAndWombats;component/Images/BadLeft.png" />
+        <Image Name="BadRight" Visibility="Collapsed" Height="455" Width="728" Source="/WizardsWitchesAndWombats;component/Images/BadRight.png" />
+        <Image Name="DoubleGood" Visibility="Collapsed" Height="455" Width="728" Source="/WizardsWitchesAndWombats;component/Images/DoubleGood.png" />
+        <Image Name="DoubleBad" Visibility="Collapsed" Height="455" Width="728" Source="/WizardsWitchesAndWombats;component/Images/DoubleBad.png" />
 
         <Image x:Name="Cloud1" Source="/WizardsWitchesAndWombats;component/Images/cloud1.png" Width="863" Height="249" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="472,12,0,0" />
         <Image x:Name="Cloud2" Source="/WizardsWitchesAndWombats;component/Images/cloud2.png" Width="880" Height="286" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1295,200,0,0" />

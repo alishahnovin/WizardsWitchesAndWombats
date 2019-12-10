@@ -23,7 +23,10 @@ namespace WizardsWitchesAndWombats
         public MainWindow()
         {
             InitializeComponent();
-            Idle.Visibility = System.Windows.Visibility.Collapsed;
+            
+            LeftCharacter.Visibility = System.Windows.Visibility.Collapsed;
+            RightCharacter.Visibility = System.Windows.Visibility.Collapsed;
+            
             DoubleGood.Visibility = System.Windows.Visibility.Collapsed;
             BadLeft.Visibility = System.Windows.Visibility.Collapsed;
             BadRight.Visibility = System.Windows.Visibility.Collapsed;
@@ -112,7 +115,7 @@ namespace WizardsWitchesAndWombats
                 System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 foreach (Type type in assembly.GetTypes())
                 {
-                    if (!type.IsInterface && typeof(Character).IsAssignableFrom(type))
+                    if (!type.IsAbstract && typeof(Character).IsAssignableFrom(type))
                     {
                         roundRobin.Add(type, null);
                     }
@@ -127,7 +130,11 @@ namespace WizardsWitchesAndWombats
                     if (shuffledRoundRobin.Count > 1)
                     {
                         VersusLabel.Visibility = System.Windows.Visibility.Visible;
-                        VersusLabel.Text = string.Format("{0} vs. {1}", shuffledRoundRobin[0].Name, shuffledRoundRobin[1].Name);
+
+                        Character character1 = (Character)Activator.CreateInstance(shuffledRoundRobin[0]);
+                        Character character2 = (Character)Activator.CreateInstance(shuffledRoundRobin[1]);
+
+                        VersusLabel.Text = string.Format("{0} vs. {1}", character1.Name, character2.Name);
 
                         MatchLabelVS.Visibility = System.Windows.Visibility.Visible;
                         MatchLabelVS.Text = string.Format("Match 1 of {0}", Convert.ToInt32(Math.Ceiling(shuffledRoundRobin.Count * (shuffledRoundRobin.Count - 1) / 2.0)));
@@ -158,9 +165,13 @@ namespace WizardsWitchesAndWombats
                             MatchLabel.Text = string.Format("Match {0} of {1}", matchCount, Convert.ToInt32(Math.Ceiling(shuffledRoundRobin.Count * (shuffledRoundRobin.Count-1)/2.0)));
 
                             CharacterScores.Visibility = System.Windows.Visibility.Visible;
-                            Idle.Visibility = System.Windows.Visibility.Visible;
-                            CharacterLeftLabel.Text = shuffledRoundRobin[i].Name;
-                            CharacterRightLabel.Text = shuffledRoundRobin[j].Name;
+                            LeftCharacter.CharacterType = character1.CharacterType;
+                            RightCharacter.CharacterType = character2.CharacterType;
+                            LeftCharacter.Visibility = System.Windows.Visibility.Visible;                            
+                            RightCharacter.Visibility = System.Windows.Visibility.Visible;
+            
+                            CharacterLeftLabel.Text = character1.Name;
+                            CharacterRightLabel.Text = character2.Name;
                         }));
 
                         int character1Score = 0;
@@ -264,8 +275,9 @@ namespace WizardsWitchesAndWombats
 
                             this.Dispatcher.BeginInvoke(new Action(() =>
                             {
-                                CharacterLeftLabel.Text = string.Format("{0}\r\n{1}{2}", shuffledRoundRobin[i].Name, character1Score <= 0 ? string.Empty : "+", character1Score);
-                                CharacterRightLabel.Text = string.Format("{0}\r\n{1}{2}", shuffledRoundRobin[j].Name, character2Score <= 0 ? string.Empty : "+", character2Score);
+
+                                CharacterLeftLabel.Text = string.Format("{0}\r\n{1}{2}", character1.Name, character1Score <= 0 ? string.Empty : "+", character1Score);
+                                CharacterRightLabel.Text = string.Format("{0}\r\n{1}{2}", character2.Name, character2Score <= 0 ? string.Empty : "+", character2Score);
                             }));
 
                             System.Threading.Thread.Sleep((_LongestInterval+_ShortestInterval) - _SpeedInterval);
@@ -305,12 +317,16 @@ namespace WizardsWitchesAndWombats
                         for (int r = 0; r < rankings.Count(); r++)
                         {
                             var kvp = rankings.ToArray()[r];
-                            rankingsDisplay.AppendLine((r + 1) + ". " + kvp.Key.Name + " (" + kvp.Value + ")");
+
+                            Character character = (Character)Activator.CreateInstance(kvp.Key);
+
+                            rankingsDisplay.AppendLine((r + 1) + ". " + character.Name + " (" + kvp.Value + ")");
                         }
 
                         this.Dispatcher.BeginInvoke(new Action(() =>
                         {
-                            Idle.Visibility = System.Windows.Visibility.Collapsed;
+                            LeftCharacter.Visibility = System.Windows.Visibility.Collapsed;
+                            RightCharacter.Visibility = System.Windows.Visibility.Collapsed;
                             CharacterLeftLabel.Visibility = System.Windows.Visibility.Collapsed;
                             CharacterRightLabel.Visibility = System.Windows.Visibility.Collapsed;
                             CharacterLeftPointsLabel.Visibility = System.Windows.Visibility.Collapsed;
@@ -325,14 +341,21 @@ namespace WizardsWitchesAndWombats
                             {
                                 VersusLabel.Visibility = System.Windows.Visibility.Visible;
 
+                                Character nextCharacter1;
+                                Character nextCharacter2;
+
                                 if (j < shuffledRoundRobin.Count - 1)
                                 {
-                                    VersusLabel.Text = string.Format("{0} vs. {1}", shuffledRoundRobin[i].Name, shuffledRoundRobin[j + 1].Name);
+                                    nextCharacter1 = (Character)Activator.CreateInstance(shuffledRoundRobin[i]);
+                                    nextCharacter2 = (Character)Activator.CreateInstance(shuffledRoundRobin[j + 1]);
                                 }
                                 else
                                 {
-                                    VersusLabel.Text = string.Format("{0} vs. {1}", shuffledRoundRobin[i + 1].Name, shuffledRoundRobin[i + 2].Name);
+                                    nextCharacter1 = (Character)Activator.CreateInstance(shuffledRoundRobin[i + 1]);
+                                    nextCharacter2 = (Character)Activator.CreateInstance(shuffledRoundRobin[i + 2]);
                                 }
+
+                                VersusLabel.Text = string.Format("{0} vs. {1}", nextCharacter1.Name, nextCharacter2.Name);
 
                                 MatchLabelVS.Visibility = System.Windows.Visibility.Visible;
                                 MatchLabelVS.Text = string.Format("Match {0} of {1}", matchCount, Convert.ToInt32(Math.Ceiling(shuffledRoundRobin.Count * (shuffledRoundRobin.Count - 1) / 2.0)));
@@ -384,18 +407,18 @@ namespace WizardsWitchesAndWombats
     public abstract class Character
     {
         public string Name { get; private set; }
-        public CharacterType CharacterType { get; private set; }
+        public CharacterTypes CharacterType { get; private set; }
         public abstract Spell GetNextAction();
         public abstract void Report(Outcome Outcome);
 
-        public Character(string Name, CharacterType Type)
+        public Character(string Name, CharacterTypes CharacterType)
         {
             this.Name = Name;
             this.CharacterType = CharacterType;
         }
     }
 
-    public enum CharacterType { Wizard, Witch, Wombat }
+    public enum CharacterTypes { Wizard, Witch, Wombat }
     public enum Spell { Light, Dark }
     public enum Outcome { Supreme = 15, BlockedLight = 5, LightBlocked = -5, Darkness = 0 }
 }

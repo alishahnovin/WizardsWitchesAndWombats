@@ -35,7 +35,7 @@ namespace WizardsWitchesAndWombats
         //Outcome currentOutcome;
         //List<Outcome> myOutcome ; 
 
-        public JasminKunfuPanda() : base("KunfuPanda", CharacterType.Wombat) { }
+        public JasminKunfuPanda() : base("KunfuPanda", CharacterTypes.Wombat) { }
 
         public override void Report(Outcome Outcome)
         {
@@ -100,7 +100,7 @@ namespace WizardsWitchesAndWombats
     public class Ketan : Character
     {
 
-        public Ketan() : base("KJ", CharacterType.Witch) { } 
+        public Ketan() : base("KJ", CharacterTypes.Witch) { } 
         
         int iterationCount = 0;
         int currentScore = 0;
@@ -134,7 +134,7 @@ namespace WizardsWitchesAndWombats
     public class Nigel : Character
     {
 
-        public Nigel() : base("Nigel", CharacterType.Wizard) { } 
+        public Nigel() : base("Nigel", CharacterTypes.Wizard) { } 
 
         //unused
         public List<Spell> opponnentsLogicPattern = new List<Spell>();//need to figure out opponent`s logic pattern
@@ -216,7 +216,7 @@ namespace WizardsWitchesAndWombats
     }
     public class VincePerson : Character
     {
-        public VincePerson() : base("Vince", CharacterType.Wizard) { }
+        public VincePerson() : base("Vince", CharacterTypes.Wizard) { }
 
         private int ActionCounter = 0;
         private int f0 = 0;
@@ -259,7 +259,7 @@ namespace WizardsWitchesAndWombats
     {
         private readonly Dictionary<Outcome, Spell> GiveMeThatIllGiveYouThis;
         private Spell NextAction = Spell.Light;
-        public RyansThisForThat() : base("Ryan", CharacterType.Wizard)
+        public RyansThisForThat() : base("Ryan", CharacterTypes.Wizard)
         {
             GiveMeThatIllGiveYouThis = new Dictionary<Outcome, Spell>()
         {
@@ -286,7 +286,7 @@ namespace WizardsWitchesAndWombats
         //  Date: 10/10/19
 
 
-        public HawyoodsSelfish() : base("Selfish", CharacterType.Wizard)
+        public HawyoodsSelfish() : base("Selfish", CharacterTypes.Wizard)
         {
             _currentFeeling = Outcome.LightBlocked;      //Start out punching to ensure we don't lose against someone hateful (we'll tie with person who only punches)
             _Score = 0;
@@ -336,7 +336,7 @@ namespace WizardsWitchesAndWombats
 
     public class NicolesProbablityStrategyPerson : Character
     {
-        public NicolesProbablityStrategyPerson() : base("Nicole", CharacterType.Witch) { }
+        public NicolesProbablityStrategyPerson() : base("Nicole", CharacterTypes.Witch) { }
 
         List<Outcome> outcomesSoFar = new List<Outcome>();
         List<Spell> actionHistory = new List<Spell>();
@@ -422,7 +422,7 @@ namespace WizardsWitchesAndWombats
 
     public class AlisFred : Character
     {
-        public AlisFred() : base("Fred", CharacterType.Wombat) { }
+        public AlisFred() : base("Fred", CharacterTypes.Wombat) { }
 
         private int counter { get; set; }
         int i = 0;
@@ -453,7 +453,7 @@ namespace WizardsWitchesAndWombats
     public class Chaos : Character
     {
 
-        public Chaos() : base("Chaos", CharacterType.Wizard) { }
+        public Chaos() : base("Chaos", CharacterTypes.Wizard) { }
 
         private Random _Random = new Random();
 
@@ -471,7 +471,7 @@ namespace WizardsWitchesAndWombats
 
     public class HuggerUntilHit : Character
     {
-        public HuggerUntilHit() : base("HuggerUntilHit", CharacterType.Wombat) { }
+        public HuggerUntilHit() : base("HuggerUntilHit", CharacterTypes.Wombat) { }
 
 
         private bool _WasHit = false;
@@ -492,7 +492,7 @@ namespace WizardsWitchesAndWombats
 
     public class PuncherUntilHugged : Character
     {
-        public PuncherUntilHugged() : base("PuncherUntilHugged", CharacterType.Witch) { }
+        public PuncherUntilHugged() : base("PuncherUntilHugged", CharacterTypes.Witch) { }
         private bool _WasHugged = false;
 
         public override Spell GetNextAction()
@@ -512,7 +512,7 @@ namespace WizardsWitchesAndWombats
     public class Tit4RecentTat : Character
     {
 
-        public Tit4RecentTat() : base("Tit4RecentTat", CharacterType.Witch) { }
+        public Tit4RecentTat() : base("Tit4RecentTat", CharacterTypes.Witch) { }
 
         private int _RecentCount = 0;
         private bool _WasHugged = true;
@@ -531,7 +531,7 @@ namespace WizardsWitchesAndWombats
 
     public class Tit4Tat : Character
     {
-        public Tit4Tat() : base("Tit4Tat", CharacterType.Wizard) { }
+        public Tit4Tat() : base("Tit4Tat", CharacterTypes.Wizard) { }
 
         private bool _WasHugged = true;
 
@@ -549,7 +549,7 @@ namespace WizardsWitchesAndWombats
     public class Tit4TatPlusKindness : Character
     {
 
-        public Tit4TatPlusKindness() : base("Tit4TatPlusKindness", CharacterType.Witch) { }
+        public Tit4TatPlusKindness() : base("Tit4TatPlusKindness", CharacterTypes.Witch) { }
 
         private bool _WasHugged = true;
         private Random _Random = new Random();
@@ -571,7 +571,7 @@ namespace WizardsWitchesAndWombats
 
     public class Tit4TatRedHaired : Character
     {
-        public Tit4TatRedHaired() : base("Tit4TatPlusKindness", CharacterType.Witch) { }
+        public Tit4TatRedHaired() : base("Tit4TatPlusKindness", CharacterTypes.Witch) { }
 
         private bool _WasHugged = true;
         private Random _Random = new Random();
@@ -593,7 +593,7 @@ namespace WizardsWitchesAndWombats
 
     public class Tit4TatPlusASmidgeOfKindness : Character
     {
-        public Tit4TatPlusASmidgeOfKindness() : base("Tit4TatPlusASmidgeOfKindness", CharacterType.Wizard) { }
+        public Tit4TatPlusASmidgeOfKindness() : base("Tit4TatPlusASmidgeOfKindness", CharacterTypes.Wizard) { }
 
         private bool _WasHugged = true;
         private Random _Random = new Random();
@@ -615,7 +615,7 @@ namespace WizardsWitchesAndWombats
 
     public class PunchAlways : Character
     {
-        public PunchAlways() : base("Tit4TatPlusASmidgeOfKindness", CharacterType.Wombat) { }
+        public PunchAlways() : base("Tit4TatPlusASmidgeOfKindness", CharacterTypes.Wombat) { }
 
         public override Spell GetNextAction()
         {
