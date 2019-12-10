@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 
 namespace WizardsWitchesAndWombats
-{/*
+{
     public class Template : Character
     {
+        public Template() : base("Name", CharacterTypes.Wizard) { }
+
         public override Spell GetNextAction()
         {
             return Spell.Dark;
@@ -16,9 +18,12 @@ namespace WizardsWitchesAndWombats
         {
 
         }
-    }*/
+    }
 
-    #region HPA Characters
+
+    /*HPA Characters
+    
+    #region Submissions
 
     public class JasminKunfuPanda : Character
     {
@@ -447,9 +452,12 @@ namespace WizardsWitchesAndWombats
         }
     }
 
+    #endregion
     //Implementations...
+    */
 
-
+    /*Standard Characters
+    #region Standard
     public class Chaos : Character
     {
 
@@ -628,9 +636,10 @@ namespace WizardsWitchesAndWombats
         }
     }
 
-    /**/
-    /**/
-    
     
     #endregion
+
+
+    */
+
 }
